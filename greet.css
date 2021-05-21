@@ -1,0 +1,26 @@
+.counter{
+ font-size: 70px;
+ position: relative;
+ color: crimson;
+ 
+  
+}
+h1{
+    color: #008000;
+}
+.container{
+    background-color:#BC8F8F;
+    
+}
+body{
+    margin: auto;
+    padding: 1em;
+}
+#theName{
+    height: 45px;
+    margin: aut0;
+}
+.form-check-label {
+    color: #008000;
+
+}
