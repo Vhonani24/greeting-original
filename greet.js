@@ -28,8 +28,10 @@ function greetMe(){
         //get old names and add to new names
         var savedUserName = JSON.parse(localStorage.getItem("username"));
         savedUserName.push(getUserName);
+
+        let uniqueNames = [...new Set(savedUserName)];
         //save the new + saved usernames to local storage
-        localStorage.setItem("username", JSON.stringify(savedUserName));
+        localStorage.setItem("username", JSON.stringify(uniqueNames));
 
         //if radio is selecte
         if(selectRadioBtn){
