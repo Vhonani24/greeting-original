@@ -6,7 +6,7 @@ const greetButton = document.querySelector("#success-outlined");
 //get reference to the greet button
 const resetButton = document.querySelector("#danger-outlined");
 //get reference to the counter
-const counter = document.querySelector("#counter");
+const counter = document.querySelector(".counter");
 //set the greeting messages
 var mandarin = "你好吗, ";
 var spanish = "Como estas, ";
@@ -15,6 +15,16 @@ var french = "Comment ça va, ";
 //This function should get username
 //should return name plus selected language 
 //should increase counter
+var setCounter = 0;
+var savedUserName =[];
+   //get old names and add to new names.
+  
+   if(localStorage["username"]){
+     savedUserName = JSON.parse(window.localStorage.getItem("username"));
+   }
+   console.log(savedUserName);
+   counter.innerHTML = savedUserName.length;
+  
 
 function greetMe(){
     //get reference to radio button from 
@@ -25,27 +35,59 @@ function greetMe(){
         if(localStorage.getItem("username") == null){
             localStorage.setItem("username", "[]");
         }
-        //get old names and add to new names
-        var savedUserName = JSON.parse(localStorage.getItem("username"));
+     
         savedUserName.push(getUserName);
+        //filter out duplicates
 
-        let uniqueNames = [...new Set(savedUserName)];
+        let filterUniqueNames = [...new Set(savedUserName)];
         //save the new + saved usernames to local storage
-        localStorage.setItem("username", JSON.stringify(uniqueNames));
+        localStorage.setItem("username", JSON.stringify(filterUniqueNames));
+        //set up counter
+        if(localStorage["setCounter"]) {
+                setCounter = filterUniqueNames.length;
+                
+                localStorage["setCounter"] = setCounter;
+                counter.innerHTML = setCounter;
+
+                
+            
+        }
+       
+        
+
 
         //if radio is selecte
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
+            
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
+               
                 if(selectRadioBtn1 === "Mandarin"){
                     greetMessage.innerHTML = mandarin + getUserName;
+                
+                    counter.innerHTML = setCounter;
+                    localStorage["setCounter"] = setCounter;
+                    setCounter++;
+                    
                 }
                 if(selectRadioBtn1 === "Spanish"){
                     greetMessage.innerHTML = spanish + getUserName;
+                   
+                    counter.innerHTML = setCounter;
+                    localStorage["setCounter"] = setCounter;
+                    setCounter++;
+                    
+                    
                 }
                 if(selectRadioBtn1 === "French"){
                     greetMessage.innerHTML = french + getUserName;
+                    
+                    counter.innerHTML = setCounter;
+                    localStorage["setCounter"] = setCounter;
+                    setCounter++;
+                    
+                    
                 }
             }
             
