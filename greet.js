@@ -48,17 +48,20 @@ function greetMe(){
                 
                 localStorage["setCounter"] = setCounter;
                 counter.innerHTML = setCounter;
-
-                
-            
         }
-       
+        //if(!selectRadioBtn1 && getUserName===""){
+           // return greetMessage.innerHTML = "Please enter your name and select a language! ";
+            //console.log(greetMessage.innerHTML);
+       //}
+     
         
 
 
         //if radio is selecte
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
+            //handle the errors
+            
             
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
@@ -69,7 +72,6 @@ function greetMe(){
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
-                    
                 }
                 if(selectRadioBtn1 === "Spanish"){
                     greetMessage.innerHTML = spanish + getUserName;
@@ -77,8 +79,6 @@ function greetMe(){
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
-                    
-                    
                 }
                 if(selectRadioBtn1 === "French"){
                     greetMessage.innerHTML = french + getUserName;
@@ -86,9 +86,8 @@ function greetMe(){
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
-                    
-                    
                 }
+               
             }
             
             
