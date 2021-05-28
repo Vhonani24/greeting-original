@@ -7,26 +7,44 @@ const greetButton = document.querySelector("#success-outlined");
 const resetButton = document.querySelector("#danger-outlined");
 //get reference to the counter
 const counter = document.querySelector(".counter");
-//set the greeting messages
-var mandarin = "你好吗, ";
-var spanish = "Como estas, ";
-var french = "Comment ça va, ";
 
 //This function should get username
 //should return name plus selected language 
 //should increase counter
-var setCounter = 0;
+var setCounter = 1;
 var savedUserName =[];
    //get old names and add to new names.
   
    if(localStorage["username"]){
      savedUserName = JSON.parse(window.localStorage.getItem("username"));
+     
    }
    console.log(savedUserName);
+
    counter.innerHTML = savedUserName.length;
+   
+
+
+   function checkErrors(){
+       
+       var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
+       if(newUserName.value=== ""){
+           greetMessage.innerHTML = "Please enter your name!";
+        }
+        else if(!selectRadioBtn){
+            greetMessage.innerHTML = "Please choose language!";
+        }
+       
+   
+        
+      
+    }
   
 
 function greetMe(){
+    checkErrors();
+
+ 
     //get reference to radio button from 
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
@@ -48,11 +66,9 @@ function greetMe(){
                 
                 localStorage["setCounter"] = setCounter;
                 counter.innerHTML = setCounter;
+                
         }
-        //if(!selectRadioBtn1 && getUserName===""){
-           // return greetMessage.innerHTML = "Please enter your name and select a language! ";
-            //console.log(greetMessage.innerHTML);
-       //}
+        
      
         
 
@@ -61,32 +77,33 @@ function greetMe(){
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
             //handle the errors
-            
+           
             
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
                
                 if(selectRadioBtn1 === "Mandarin"){
-                    greetMessage.innerHTML = mandarin + getUserName;
+                    greetMessage.innerHTML = "你好吗, " + getUserName;
                 
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
                 }
                 if(selectRadioBtn1 === "Spanish"){
-                    greetMessage.innerHTML = spanish + getUserName;
+                    greetMessage.innerHTML = "Como estas, " + getUserName;
                    
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
                 }
                 if(selectRadioBtn1 === "French"){
-                    greetMessage.innerHTML = french + getUserName;
+                    greetMessage.innerHTML = "Comment ça va, " + getUserName;
                     
                     counter.innerHTML = setCounter;
                     localStorage["setCounter"] = setCounter;
                     setCounter++;
                 }
+                
                
             }
             
@@ -101,6 +118,7 @@ function greetMe(){
 
 function reset(){
     localStorage.clear();
+    counter.innerHTML = 0
 }
 
 greetButton.addEventListener("click", greetMe)
