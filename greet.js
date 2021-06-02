@@ -15,7 +15,7 @@ var french = "Comment ça va, ";
 //This function should get username
 //should return name plus selected language 
 //should increase counter
-var setCounter = 0;
+var setCounter = 1;
 var savedUserName =[];
    //get old names and add to new names.
   
@@ -24,6 +24,8 @@ var savedUserName =[];
    }
    console.log(savedUserName);
    counter.innerHTML = savedUserName.length;
+   
+   
   
 
 function greetMe(){
@@ -31,13 +33,22 @@ function greetMe(){
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
         var getUserName = newUserName.value;
+        
         //if there is nothing save at the start then save an empty array
         if(localStorage.getItem("username") == null){
             localStorage.setItem("username", "[]");
         }
-     
-        savedUserName.push(getUserName);
-        //filter out duplicates
+        if(getUserName != ""){
+            savedUserName.push(getUserName);
+            //filter out duplicates
+
+        }
+        
+        
+
+        
+        
+
 
         let filterUniqueNames = [...new Set(savedUserName)];
         //save the new + saved usernames to local storage
@@ -49,11 +60,7 @@ function greetMe(){
                 localStorage["setCounter"] = setCounter;
                 counter.innerHTML = setCounter;
         }
-        //if(!selectRadioBtn1 && getUserName===""){
-           // return greetMessage.innerHTML = "Please enter your name and select a language! ";
-            //console.log(greetMessage.innerHTML);
-       //}
-     
+        
         
 
 
@@ -63,9 +70,10 @@ function greetMe(){
             //handle the errors
             
             
+            
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
-               
+                
                 if(selectRadioBtn1 === "Mandarin"){
                     greetMessage.innerHTML = mandarin + getUserName;
                 
@@ -91,6 +99,8 @@ function greetMe(){
             }
             
             
+        }else{
+            greetMessage.innerHTML = "BOO";
         }
 
 
