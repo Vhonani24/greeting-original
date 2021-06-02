@@ -100,7 +100,7 @@ function greetMe(){
             
             
         }else{
-            greetMessage.innerHTML = "BOO";
+            greetMessage.innerHTML = "Please select a language!";
         }
 
 
