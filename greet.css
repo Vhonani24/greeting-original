@@ -1,13 +1,20 @@
 .counter{
  font-size: 70px;
  position: relative;
- color: crimson;
+ color: dodgerblue;
  
   
 }
 h1{
-    color: #008000;
+    color: dodgerblue;
 }
+h2{
+    color: oldlace;
+}
+.h2{
+    color: dodgerblue;
+} 
+
 .container{
     background-color:#BC8F8F;
     
@@ -21,6 +28,6 @@ body{
     margin: aut0;
 }
 .form-check-label {
-    color: #008000;
+    color: dodgerblue;
 
 }

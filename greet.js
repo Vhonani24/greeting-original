@@ -23,6 +23,7 @@ var savedUserName =[];
 
    counter.innerHTML = savedUserName.length;
    
+<<<<<<< HEAD
 
 
    function checkErrors(){
@@ -39,6 +40,9 @@ var savedUserName =[];
         
       
     }
+=======
+   
+>>>>>>> 1cbdbc46e514dba111aa2d6bfff4785b9fc8d9c6
   
 
 function greetMe(){
@@ -49,13 +53,22 @@ function greetMe(){
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
         var getUserName = newUserName.value;
+        
         //if there is nothing save at the start then save an empty array
         if(localStorage.getItem("username") == null){
             localStorage.setItem("username", "[]");
         }
-     
-        savedUserName.push(getUserName);
-        //filter out duplicates
+        if(getUserName != ""){
+            savedUserName.push(getUserName);
+            //filter out duplicates
+
+        }
+        
+        
+
+        
+        
+
 
         let filterUniqueNames = [...new Set(savedUserName)];
         //save the new + saved usernames to local storage
@@ -69,7 +82,10 @@ function greetMe(){
                 
         }
         
+<<<<<<< HEAD
      
+=======
+>>>>>>> 1cbdbc46e514dba111aa2d6bfff4785b9fc8d9c6
         
 
 
@@ -79,9 +95,10 @@ function greetMe(){
             //handle the errors
            
             
+            
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
-               
+                
                 if(selectRadioBtn1 === "Mandarin"){
                     greetMessage.innerHTML = "你好吗, " + getUserName;
                 
@@ -108,6 +125,8 @@ function greetMe(){
             }
             
             
+        }else{
+            greetMessage.innerHTML = "Please select a language!";
         }
 
 
