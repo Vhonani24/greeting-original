@@ -9,46 +9,34 @@ const resetButton = document.querySelector("#danger-outlined");
 const counter = document.querySelector(".counter");
 
 //This function should get username
+
+
+
 //should return name plus selected language 
 //should increase counter
-var setCounter = 1;
-var savedUserName =[];
+//var setCounter = 1;
+var getName;
    //get old names and add to new names.
+
   
    if(localStorage["username"]){
-     savedUserName = JSON.parse(window.localStorage.getItem("username"));
+     getName = JSON.parse(window.localStorage.getItem("username"));
      
    }
-   console.log(savedUserName);
-
-   counter.innerHTML = savedUserName.length;
+   //console.log(savedUserName);
+let selectLang = greetFactory(getName);
    
-<<<<<<< HEAD
+
+counter.innerHTML = selectLang.setCounter();
+   
 
 
-   function checkErrors(){
-       
-       var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
-       if(newUserName.value=== ""){
-           greetMessage.innerHTML = "Please enter your name!";
-        }
-        else if(!selectRadioBtn){
-            greetMessage.innerHTML = "Please choose language!";
-        }
-       
    
-        
-      
-    }
-=======
    
->>>>>>> 1cbdbc46e514dba111aa2d6bfff4785b9fc8d9c6
   
 
 function greetMe(){
-    checkErrors();
 
- 
     //get reference to radio button from 
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
@@ -58,75 +46,61 @@ function greetMe(){
         if(localStorage.getItem("username") == null){
             localStorage.setItem("username", "[]");
         }
-        if(getUserName != ""){
+
+        selectLang.pushNames(getUserName);
+        /*if(getUserName != ""){
             savedUserName.push(getUserName);
             //filter out duplicates
 
-        }
-        
-        
-
+        }*/
         
         
 
 
-        let filterUniqueNames = [...new Set(savedUserName)];
+
+
+        let filterUniqueNames = [...new Set(getName)];
         //save the new + saved usernames to local storage
         localStorage.setItem("username", JSON.stringify(filterUniqueNames));
         //set up counter
         if(localStorage["setCounter"]) {
                 setCounter = filterUniqueNames.length;
                 
-                localStorage["setCounter"] = setCounter;
-                counter.innerHTML = setCounter;
+                //localStorage["setCounter"] = setCounter;
+                counter.innerHTML = selectLang.setCounter();
                 
         }
         
-<<<<<<< HEAD
      
-=======
->>>>>>> 1cbdbc46e514dba111aa2d6bfff4785b9fc8d9c6
-        
+        //greetMessage.innerHTML = selectLang.setErrors(getUserName,selectRadioBtn);
 
 
         //if radio is selecte
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
-            //handle the errors
-           
-            
+            //handle the errors 
             
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
-                
-                if(selectRadioBtn1 === "Mandarin"){
-                    greetMessage.innerHTML = "你好吗, " + getUserName;
-                
-                    counter.innerHTML = setCounter;
-                    localStorage["setCounter"] = setCounter;
-                    setCounter++;
+
+                selectLang.greetings(selectRadioBtn1,getUserName);
+                if(selectRadioBtn1 && getUserName){
+                    greetMessage.innerHTML = selectLang.greetings(selectRadioBtn1,getUserName);
+        
                 }
-                if(selectRadioBtn1 === "Spanish"){
-                    greetMessage.innerHTML = "Como estas, " + getUserName;
+
+           
                    
-                    counter.innerHTML = setCounter;
-                    localStorage["setCounter"] = setCounter;
-                    setCounter++;
-                }
-                if(selectRadioBtn1 === "French"){
-                    greetMessage.innerHTML = "Comment ça va, " + getUserName;
-                    
-                    counter.innerHTML = setCounter;
-                    localStorage["setCounter"] = setCounter;
-                    setCounter++;
-                }
                 
+                    counter.innerHTML = selectLang.setCounter();
+                    //localStorage["setCounter"] = setCounter;
+                    //setCounter++;
+                
+         
                
             }
             
             
-        }else{
-            greetMessage.innerHTML = "Please select a language!";
         }
 
 
