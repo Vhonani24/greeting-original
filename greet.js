@@ -16,6 +16,8 @@ const counter = document.querySelector(".counter");
 //should increase counter
 //var setCounter = 1;
 var getName;
+var regex = /^[A-Za-z]+$/;
+
    //get old names and add to new names.
 
   
@@ -36,23 +38,31 @@ counter.innerHTML = selectLang.setCounter();
   
 
 function greetMe(){
-
+    
     //get reference to radio button from 
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
         var getUserName = newUserName.value;
+        //set up regex
+      
+
+        getUserName = getUserName.charAt(0).toUpperCase() + getUserName.slice(1);
+        
+
+        
+        
+
+        
+       
         
         //if there is nothing save at the start then save an empty array
         if(localStorage.getItem("username") == null){
             localStorage.setItem("username", "[]");
         }
-
+        
+       
         selectLang.pushNames(getUserName);
-        /*if(getUserName != ""){
-            savedUserName.push(getUserName);
-            //filter out duplicates
-
-        }*/
+        
         
         
 
@@ -62,39 +72,37 @@ function greetMe(){
         let filterUniqueNames = [...new Set(getName)];
         //save the new + saved usernames to local storage
         localStorage.setItem("username", JSON.stringify(filterUniqueNames));
+        
         //set up counter
         if(localStorage["setCounter"]) {
                 setCounter = filterUniqueNames.length;
                 
-                //localStorage["setCounter"] = setCounter;
+                
                 counter.innerHTML = selectLang.setCounter();
                 
         }
-        
-     
-        //greetMessage.innerHTML = selectLang.setErrors(getUserName,selectRadioBtn);
-
-
+       
+       
         //if radio is selecte
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
-            //handle the errors 
-            
+          
+
             //if there is indeed usernames then continue
             if(localStorage.getItem("username") != null){
 
                 selectLang.greetings(selectRadioBtn1,getUserName);
                 if(selectRadioBtn1 && getUserName){
-                    greetMessage.innerHTML = selectLang.greetings(selectRadioBtn1,getUserName);
-        
-                }
-
-           
+                    if(getUserName.match(regex)){
+                        greetMessage.innerHTML = selectLang.greetings(selectRadioBtn1,getUserName);
+                    }else{
+                        greetMessage.innerHTML = "Please enter a valid name!!"
+                    }
                    
-                
-                    counter.innerHTML = selectLang.setCounter();
-                    //localStorage["setCounter"] = setCounter;
-                    //setCounter++;
+ 
+        
+                } counter.innerHTML = selectLang.setCounter();
+                    
                 
          
                
@@ -102,9 +110,11 @@ function greetMe(){
             
             
         }
+         //error messages
+         if (selectLang.setErrors(getUserName, selectRadioBtn1) !== undefined) {
 
-
-
+         greetMessage.innerHTML =  selectLang.setErrors(getUserName, selectRadioBtn1);
+         }
 
     
 }

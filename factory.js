@@ -5,32 +5,44 @@
 
 function greetFactory(getName){
 
+ 
+
     var names = getName || [];
+    var regex = /^[A-Za-z]+$/;
 
 
 
 
     function greetings(str, name){
         
-        
-        if(str === "Mandarin"){
-            return "你好吗, " + name;
+        if(name.match(regex)){
+            if(str === "Mandarin"){
+                return "你好吗, " + name;
+            }
+            if(str === "Spanish"){
+                return "Como estas, " + name;
+            }
+            if(str === "French"){
+                return "Comment ça va, " + name;
+            }
+
         }
-        if(str === "Spanish"){
-            return "Como estas, " + name;
-        }
-        if(str === "French"){
-            return "Comment ça va, " + name;
-        }
+       
     }
 
     function pushNames(enterNames){
-        if(!names.includes(enterNames)){
-            names.push(enterNames);
+        if(enterNames.match(regex)){
+
+            if(!names.includes(enterNames)){
+                names.push(enterNames);
+            }
+    
+            console.log(names);
+    
+
         }
 
-        console.log(names);
-
+        
     }
 
     function setCounter(){
@@ -38,6 +50,8 @@ function greetFactory(getName){
     }
 
     function setErrors(name,lang){
+      
+
         if(name === "" && !lang){
             return "Please select name & language "
         }
@@ -47,6 +61,7 @@ function greetFactory(getName){
         if(!lang){
             return "Please select a language!"
         }
+       
          
     }
 
