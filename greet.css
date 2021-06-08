@@ -54,8 +54,16 @@ body{
     font-style:  italic;
     font-weight: bolder;
     margin-top: 25px;
-    margin-bottom: 25px;
-   
-   
+    margin-bottom: 25px;   
    
 }
+
+a {
+    color: dodgerblue;
+    right: 150px;
+    font-family: sans-serif;
+    font-style:  italic;
+    font-weight: bold;
+    
+}
+
