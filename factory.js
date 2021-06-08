@@ -1,7 +1,3 @@
-//start with the greeting message function
-//pushing names into a list , function
-//create a counter function....can just return the list length as counter
-//handle errors messages
 
 function greetFactory(getName){
 
@@ -17,13 +13,13 @@ function greetFactory(getName){
         
         if(name.match(regex)){
             if(str === "Mandarin"){
-                return "你好吗, " + name;
+                return "你好吗, " + name.charAt(0).toUpperCase() +  name.slice(1);
             }
             if(str === "Spanish"){
-                return "Como estas, " + name;
+                return "Como estas, " + name.charAt(0).toUpperCase() +  name.slice(1);
             }
             if(str === "French"){
-                return "Comment ça va, " + name;
+                return "Comment ça va, " + name.charAt(0).toUpperCase() +  name.slice(1);
             }
 
         }
@@ -46,14 +42,20 @@ function greetFactory(getName){
     }
 
     function setCounter(){
+        
         return names.length;
     }
+   
+    function greetNameList(){
+        return names;
+    }
+    
 
     function setErrors(name,lang){
       
 
         if(name === "" && !lang){
-            return "Please select name & language "
+            return "Please select name & language!"
         }
         if(name===""){
             return "Please enter your name!"
@@ -71,7 +73,8 @@ return{
     greetings,
     pushNames,
     setCounter,
-    setErrors
+    setErrors,
+    greetNameList
 }
 
 

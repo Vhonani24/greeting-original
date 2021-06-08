@@ -1,33 +1,61 @@
 .counter{
- font-size: 70px;
+ font-size: 50px;
  position: relative;
  color: dodgerblue;
  
   
 }
+
 h1{
     color: dodgerblue;
+    text-shadow: 2px 2px black;
+    font-family: sans-serif;
+    font-style:  italic;
+    font-weight: bold;
+    
+    
 }
-h2{
-    color: oldlace;
-}
-.h2{
+
+
+.h3{
     color: dodgerblue;
+    text-shadow: 2px 2px black;
+    font-family: sans-serif;
+    font-style:  italic;
+    font-weight: bold;
 } 
 
 .container{
     background-color:#BC8F8F;
+   
+    height: 50%;
+   
     
 }
 body{
     margin: auto;
     padding: 1em;
+    text-align: center;
 }
-#theName{
-    height: 45px;
-    margin: aut0;
-}
+
 .form-check-label {
     color: dodgerblue;
+    text-shadow: 2px 2px black;
+    font-family: sans-serif;
+    font-style:  italic;
+    font-weight: bold;
 
+}
+
+#greetMessage{
+    color: crimson;
+    text-align: center;
+    font-family: sans-serif;
+    font-style:  italic;
+    font-weight: bolder;
+    margin-top: 25px;
+    margin-bottom: 25px;
+   
+   
+   
 }
