@@ -16,7 +16,6 @@ var regex = /^[A-Za-z]+$/;
      getName = JSON.parse(window.localStorage.getItem("username"));
      
    }
-   //console.log(savedUserName);
 let selectLang = greetFactory(getName);
    
 
@@ -29,14 +28,12 @@ function greetMe(){
     var selectRadioBtn = document.querySelector("input[name='inlineRadioOptions']:checked");
     //get data new data from  input box
         var getUserName = newUserName.value;
-        //set up regex
-      
-
+        
+    
         getUserName = getUserName.charAt(0).toUpperCase() + getUserName.slice(1).toLowerCase();
         
        
         if(localStorage["setCounter"]) {
-                //setCounter = filterUniqueNames.length;
                 
                 
                 counter.innerHTML = selectLang.setCounter();
