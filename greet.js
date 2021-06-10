@@ -32,23 +32,11 @@ function greetMe(){
         //set up regex
       
 
-        getUserName = getUserName.charAt(0).toUpperCase() + getUserName.slice(1);
+        getUserName = getUserName.charAt(0).toUpperCase() + getUserName.slice(1).toLowerCase();
         
-        //if there is nothing save at the start then save an empty array
-        if(localStorage.getItem("username") == null){
-            localStorage.setItem("username", "[]");
-        }
-        
-        selectLang.pushNames(getUserName);
-
-
-        let filterUniqueNames = [...new Set(getName)];
-        //save the new + saved usernames to local storage
-        localStorage.setItem("username", JSON.stringify(filterUniqueNames));
-        
-        //set up counter
+       
         if(localStorage["setCounter"]) {
-                setCounter = filterUniqueNames.length;
+                //setCounter = filterUniqueNames.length;
                 
                 
                 counter.innerHTML = selectLang.setCounter();
@@ -56,16 +44,14 @@ function greetMe(){
         }
        
        
-        //if radio is selecte
+        //if radio is selected
         if(selectRadioBtn){
             var selectRadioBtn1 = selectRadioBtn.value;
           
 
-            //if there is indeed usernames then continue
-            if(localStorage.getItem("username") != null){
-
                 selectLang.greetings(selectRadioBtn1,getUserName);
                 if(selectRadioBtn1 && getUserName){
+                    selectLang.pushNames(getUserName);
                     if(getUserName.match(regex)){
                         greetMessage.innerHTML = selectLang.greetings(selectRadioBtn1,getUserName);
                         newUserName.value = "";
@@ -81,25 +67,22 @@ function greetMe(){
  
         
                 } counter.innerHTML = selectLang.setCounter();
-    
-               
-            }
-            
             
         }
          //error messages
          if (selectLang.setErrors(getUserName, selectRadioBtn1) !== undefined) {
 
          greetMessage.innerHTML =  selectLang.setErrors(getUserName, selectRadioBtn1);
-         greetMessage.classList.add("warning");
-         
+
          }
 
-    
+    //save the new + saved usernames to local storage
+    localStorage.setItem("username", JSON.stringify(selectLang.greetNameList()));
 }
 
 function reset(){
     localStorage.clear();
+    location.reload();
     counter.innerHTML = 0
     greetMessage.innerHTML = "";
 }
