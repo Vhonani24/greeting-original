@@ -1,24 +1,34 @@
 
-function greetFactory(getName){
+module.exports = function Greetings(getName){
 
  
-
+    var userName; 
     var names = getName || [];
     var regex = /^[A-Za-z]+$/;
 
+function setNames(name){
+    userName = name;
+
+}
+
+function getNames(){
+    return userName;
+
+}
+   
 
 
 
-    function greetings(str, name){
+    function greet(name, lang){
         
         if(name.match(regex)){
-            if(str === "Mandarin"){
+            if(lang === "Mandarin"){
                 return "你好吗, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
             }
-            if(str === "Spanish"){
+            if(lang === "Spanish"){
                 return "Como estas, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
             }
-            if(str === "French"){
+            if(lang === "French"){
                 return "Comment ça va, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
             }
 
@@ -68,11 +78,13 @@ function greetFactory(getName){
     
 
 return{
-    greetings,
+    greet,
     pushNames,
     setCounter,
     setErrors,
-    greetNameList
+    greetNameList,
+    getNames,
+    setNames
 }
 
 

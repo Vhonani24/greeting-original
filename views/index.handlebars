@@ -1,0 +1,37 @@
+<form action="/greeted" method="post">
+    <div class="mb-3">
+        <h1>Greetings Exercise</h2>
+            <div class="input-group w-50">
+                <input type="text" class="form-control" name="name"id="name" placeholder="Enter your name"
+                    style="right: -150px;">
+            </div>
+            <h3 class="h3">Counter = <span class="counter" style="font-size: 40px"> 0</span></h3>
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="lang" id="inlineRadio1" value="Mandarin">
+        <label class="form-check-label" for="inlineRadio1">Mandarin</label>
+
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="lang" id="inlineRadio2" value="Spanish">
+        <label class="form-check-label" for="inlineRadio2">Spanish</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="lang" id="inlineRadio3" value="French">
+        <label class="form-check-label" for="inlineRadio3">French</label>
+    </div>
+
+    <h4 id="greetMessage">{{greets}}</h4>
+
+    <div>
+        <input type="submit" class="btn-check" name="button" id="greetMe" autocomplete="off">
+        <label class="btn btn-outline-success" for="success-outlined" type="submit">Greet Me</label>
+
+
+        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+        <label class="btn btn-outline-danger" for="danger-outlined">Reset</label>
+
+    </div>
+
+</form>
