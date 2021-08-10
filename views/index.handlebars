@@ -1,11 +1,11 @@
-<form action="/greeted" method="post">
+<form action="/greeted" method="POST">
     <div class="mb-3">
         <h1>Greetings Web-App</h2>
             <div class="input-group w-50">
                 <input type="text" class="form-control" name="name"id="name" placeholder="Enter your name"
                     style="right: -150px;">
             </div>
-            <h3 class="h3">Counter = <span class="counter" style="font-size: 40px"> 0</span></h3>
+            <h3 class="h3">Counter = <span class="counter" style="font-size: 40px"> {{counter}}</span></h3>
     </div>
 
     <div class="form-check form-check-inline">
@@ -22,16 +22,14 @@
         <label class="form-check-label" for="inlineRadio3">French</label>
     </div>
 
-    <h4 id="greetMessage">{{greets}}</h4>
+    <h4 id="greetMessage">{{greetMessage}}</h4>
 
     <div>
-        <input type="submit" class="btn-check" name="button" id="greetMe" autocomplete="off">
-        <label class="btn btn-outline-success" for="success-outlined" type="submit">Greet Me</label>
-
-
-        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-        <label class="btn btn-outline-danger" for="danger-outlined">Reset</label>
+        <button type="submit" class="btn btn-outline-secondary" id="submit">Greet Me</button>
+        
 
     </div>
+    
 
-</form>
+    </form>
+    

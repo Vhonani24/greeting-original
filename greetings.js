@@ -2,7 +2,8 @@
 module.exports = function Greetings(getName){
 
  
-    var userName; 
+    var userName = ""; 
+    var lang;
     var names = getName || [];
     var regex = /^[A-Za-z]+$/;
 
@@ -16,20 +17,26 @@ function getNames(){
 
 }
    
+function setLang(language){
+    lang = language;
+}
+function getLang(){
+    return lang;
+
+}
 
 
-
-    function greet(name, lang){
+    function greet(){
         
-        if(name.match(regex)){
-            if(lang === "Mandarin"){
-                return "你好吗, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
+        if(getNames().match(regex)){
+            if(getLang() === "Mandarin"){
+                return "你好吗, " + getNames().charAt(0).toUpperCase() +  getNames().slice(1).toLowerCase();
             }
-            if(lang === "Spanish"){
-                return "Como estas, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
+            if(getLang() === "Spanish"){
+                return "Como estas, " + getNames().charAt(0).toUpperCase() +  getNames().slice(1).toLowerCase();
             }
-            if(lang === "French"){
-                return "Comment ça va, " + name.charAt(0).toUpperCase() +  name.slice(1).toLowerCase();
+            if(getLang() === "French"){
+                return "Comment ça va, " + getNames().charAt(0).toUpperCase() +  getNames().slice(1).toLowerCase();
             }
 
         }
@@ -84,7 +91,9 @@ return{
     setErrors,
     greetNameList,
     getNames,
-    setNames
+    setNames,
+    setLang,
+    getLang
 }
 
 
