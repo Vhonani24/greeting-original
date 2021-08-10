@@ -7,17 +7,26 @@ describe('The greet function', function(){
         it('should be able to take in a name and return a greeting in Spanish and that name with the first letter uppercased', function(){
 
             let testGreet = Greetings();
-            assert.equal( 'Como estas, Ted', testGreet.greetings('Spanish', 'ted'));
+
+            testGreet.setNames('ted');
+            testGreet.setLang('Spanish');
+            assert.equal( 'Como estas, Ted', testGreet.greet());
         });
         it('should be able to take in a name and return a greeting in Mandarin and that name with the first letter uppercased', function(){
     
             let testGreet = Greetings();
-            assert.equal('你好吗, Ted', testGreet.greetings('Mandarin', 'ted'));
+
+            testGreet.setNames('ted');
+            testGreet.setLang('Mandarin');
+            assert.equal('你好吗, Ted', testGreet.greet());
         });
         it('should be able to take in a name and return a greeting in French and that name with the first letter uppercased', function(){
     
             let testGreet = Greetings();
-            assert.equal('Comment ça va, Ted', testGreet.greetings('French', 'ted'));
+
+            testGreet.setNames('ted');
+            testGreet.setLang('French');
+            assert.equal('Comment ça va, Ted', testGreet.greet());
         });
 
     });
@@ -26,8 +35,10 @@ describe('The greet function', function(){
 
             let testGreet = Greetings();
 
+            testGreet.setNames('Musa');
             testGreet.pushNames('Musa');
-            testGreet.greetings('French', 'musa');
+            testGreet.setLang('French');
+            testGreet.greet();
             
             assert.equal( 1, testGreet.setCounter());
          
@@ -35,12 +46,14 @@ describe('The greet function', function(){
         it('Should be able to return the count number if same person greetet in all 3 langauges', function(){
 
             let testGreet = Greetings();
+            testGreet.setNames('Musa');
+            testGreet.setLang('French');
 
             testGreet.pushNames('Musa');
             testGreet.pushNames('Musa');
-            testGreet.greetings('French', 'musa');
-            testGreet.greetings('Mandarin', 'musa');
-            testGreet.greetings('Spanish', 'musa');
+            testGreet.greet();
+            testGreet.greet();
+            testGreet.greet();
             
             assert.equal( 1, testGreet.setCounter());
          
