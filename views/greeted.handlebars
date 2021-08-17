@@ -1,0 +1,11 @@
+<div class="row">
+    <h1>List of greeted people</h1>
+    <table>
+        
+        {{#each greeting}}
+        <tr>
+            <td><a href="/counter/:{{this}}">{{this}}</a></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

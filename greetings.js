@@ -1,11 +1,10 @@
 
 module.exports = function Greetings(getName){
-
- 
     var userName = ""; 
     var lang;
     var names = getName || [];
     var regex = /^[A-Za-z]+$/;
+
 
 function setNames(name){
     userName = name;
@@ -26,6 +25,7 @@ function getLang(){
 }
 
 
+
     function greet(){
         
         if(getNames().match(regex)){
@@ -40,6 +40,7 @@ function getLang(){
             }
 
         }
+        
        
     }
 
@@ -48,6 +49,7 @@ function getLang(){
 
             if(!names.includes(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())))){
                 names.push(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())));
+                
             }
     
 
@@ -61,8 +63,8 @@ function getLang(){
         return names.length;
     }
    
-    function greetNameList(){
-        return names;
+    function greeted(){
+        return names.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
     }
     
 
@@ -89,7 +91,7 @@ return{
     pushNames,
     setCounter,
     setErrors,
-    greetNameList,
+    greeted,
     getNames,
     setNames,
     setLang,
