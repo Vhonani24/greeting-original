@@ -77,6 +77,8 @@ app.post('/', function (req, res) {
         greetings.greeted();
         res.redirect("/");
 
+        console.log(greetings.greeted())
+
 
     }
     

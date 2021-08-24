@@ -1,8 +1,8 @@
 
-module.exports = function Greetings(getName){
+module.exports = function Greetings(){
     var userName = ""; 
     var lang;
-    var names = getName || [];
+    var names = [];
     var regex = /^[A-Za-z]+$/;
 
 
@@ -45,12 +45,33 @@ function getLang(){
     }
 
     function pushNames(enterNames){
-        if(enterNames.match(regex)){
-
-            if(!names.includes(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())))){
-                names.push(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())));
-                
+        var nameToUpperCase = enterNames.charAt(0).toUpperCase() + enterNames.slice(1).toLowerCase()
+        if(nameToUpperCase.match(regex)){
+            if (names.length == 0) {
+                names.push({
+                    name: nameToUpperCase,
+                    counter: 1
+                });
+            } else {
+                if (!names.some(names => names.name === nameToUpperCase)) {
+                    names.push({
+                        name: nameToUpperCase,
+                        counter: 1
+                    });
+                } else {
+                    names.forEach(element => {
+                        if (element.name === nameToUpperCase) {
+                            element.counter++
+                        }
+                    });
+                }
             }
+
+
+            // if(!names.includes(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())))){
+            //     names.push(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())));
+                
+            // }
     
 
         }
@@ -64,7 +85,7 @@ function getLang(){
     }
    
     function greeted(){
-        return names.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
+        return names;
     }
     
 
