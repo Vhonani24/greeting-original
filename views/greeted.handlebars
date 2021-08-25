@@ -4,8 +4,12 @@
         
         {{#each greeting}}
         <tr>
-            <td><a href="/counter/:{{this}}">{{name}}</a></td>
+            <td><a href="/counter/{{name}}">{{name}}</a></td>
         </tr>
         {{/each}}
+
+         
     </table>
+
+    <a style="color:purple"href="/">Back to greetings</a>
 </div>

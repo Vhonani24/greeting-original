@@ -51,9 +51,11 @@ app.get('/greeted', function(req, res){
     });
 });
 app.get('/counter/:name', function(req, res){
-    const name = req.params.name;
+    const user = req.params.names;
+    console.log(req.params.name);
     res.render('counter', {
-        //greeting: greetings.greeted(),
+        userGreeted: greetings.usernameFor(user)
+    
         
        
     });
