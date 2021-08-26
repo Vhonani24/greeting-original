@@ -37,6 +37,7 @@ app.get('/', function (req, res) {
         greetMessage: greetings.greet(),
         counter: greetings.setCounter(),
        
+       
         
         
 
@@ -51,14 +52,16 @@ app.get('/greeted', function(req, res){
     });
 });
 app.get('/counter/:name', function(req, res){
-    const user = req.params.names;
-    console.log(req.params.name);
+    const user = req.params.name;
+    // console.log(greetings.usernameObj(user));
     res.render('counter', {
-        userGreeted: greetings.usernameFor(user)
+        userGreeted: greetings.usernameObj(user)
     
         
        
     });
+
+
 });
 
 app.post('/', function (req, res) {
@@ -77,9 +80,10 @@ app.post('/', function (req, res) {
         greetings.pushNames(req.body.name);
         greetings.setCounter();
         greetings.greeted();
+       
         res.redirect("/");
 
-        console.log(greetings.greeted())
+        // console.log(greetings.greeted())
 
 
     }

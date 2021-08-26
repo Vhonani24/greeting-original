@@ -24,10 +24,8 @@ module.exports = function Greetings() {
 
     }
 
-
-
     function greet() {
-        var greetMessage ="";
+       
 
         if (getNames().match(regex)) {
             if (getLang() === "Mandarin") {
@@ -69,27 +67,24 @@ module.exports = function Greetings() {
             }
 
 
-            // if(!names.includes(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())))){
-            //     names.push(enterNames.replace(/(\B)[^ ]*/g, match => (match.toLowerCase())));
-
-            // }
-
-
         }
 
 
     }
-    function usernameFor(user) {
+    function usernameObj(user) {
         let userInfo;
         names.forEach(element => {
-            if(element.username === user){
-                userInfo = {
+            if (element.name === user) {
+
+                userObj = {
                     name: element.name,
                     counter: element.counter
                 };
             }
+
+
         });
-        return userInfo;
+        return userObj;
     }
 
     function setCounter() {
@@ -101,43 +96,16 @@ module.exports = function Greetings() {
         return names;
     }
 
-
-    function setErrors(name, lang) {
-
-
-        if (name === "" && !lang) {
-            return "Please select name & language!"
-        }
-        if (name === "") {
-            return "Please enter your name!"
-        }
-        if (!lang) {
-            return "Please select a language!"
-        }
-
-
-    }
-    
-
-    function reset(){
-        message = "Reset successful!";
-        greet.clear();
-    }
-
-
-
     return {
         greet,
         pushNames,
         setCounter,
-        setErrors,
         greeted,
         getNames,
         setNames,
         setLang,
         getLang,
-        usernameFor,
-        reset
+        usernameObj
     }
 
 
