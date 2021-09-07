@@ -67,11 +67,16 @@ app.get('/greeted', function(req, res){
        
     });
 });
-app.get('/counter/:name', function(req, res){
+app.get('/counter/:name', async function(req, res){
     const user = req.params.name;
+    
+    userGreeted=await greetings.individualCounter(user);
+
     // console.log(greetings.usernameObj(user));
     res.render('counter', {
-        userGreeted: greetings.usernameObj(user)
+        user,
+        userGreeted
+       
     
         
        
@@ -106,6 +111,11 @@ app.post('/', async function (req, res) {
     
     
         
+});
+app.post('/reset', async function (req, res){
+    await greetings.resetDatabase();
+    res.redirect('/');
+
 });
 
 

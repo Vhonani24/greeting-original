@@ -1,12 +1,22 @@
 const assert = require('assert');
-
 const Greetings = require('../greetings');
+const pg = require("pg");
+const Pool = pg.Pool;
+// we are using a special test database for the tests
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/greet';
+
+const pool = new Pool({
+    connectionString
+});
 
 describe('The greet function', function(){
-    describe('Greetings', function(){
-        it('should be able to take in a name and return a greeting in Spanish and that name with the first letter uppercased', function(){
+    beforeEach(async function(){
+        // clean the tables before each test run
+        await pool.query("delete from users;");
+    });
+     it('should return 0 when database is reset', async function(){
 
-            let testGreet = Greetings();
+            let testGreet = Greetings(pool);
 
             testGreet.setNames('ted');
             testGreet.setLang('Spanish');

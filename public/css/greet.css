@@ -67,4 +67,18 @@ a {
     font-weight: bold;
     
 }
+button{
+    display: inline-block;
+   
+}
+.buttons{
+    display: flex;
+    
+    justify-content: center;
+    align-content: center;
+
+    
+    
+
+}
 

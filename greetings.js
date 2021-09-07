@@ -90,7 +90,7 @@ module.exports = function Greetings(pool) {
 
     }
     function usernameObj(user) {
-        let userInfo;
+        let userObj;
         names.forEach(element => {
             if (element.name === user) {
 
@@ -107,11 +107,21 @@ module.exports = function Greetings(pool) {
 
     async function setCounter() {
         names = await pool.query(`select * from users`)
-        names = names.row
+        names = names.rows
 
         return names.length;
     
     }
+    async function individualCounter(individual){
+        var count = await pool.query(`SELECT count FROM users WHERE name = $1`,[individual])
+        count = count.rows;
+        return count[0].count;
+    }
+    async function resetDatabase(){
+         await pool.query(`DELETE  FROM users`)
+       
+    }
+
 
     function greeted() {
         return names;
@@ -126,7 +136,9 @@ module.exports = function Greetings(pool) {
         setNames,
         setLang,
         getLang,
-        usernameObj
+        usernameObj,
+        individualCounter,
+        resetDatabase
     }
 
 
