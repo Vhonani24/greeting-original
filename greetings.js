@@ -1,5 +1,5 @@
 
-module.exports = function Greetings() {
+module.exports = function Greetings(pool) {
     var userName = "";
     var lang;
     var names = [];
@@ -42,33 +42,51 @@ module.exports = function Greetings() {
 
 
     }
+    
 
-    function pushNames(enterNames) {
+    async function pushNames(enterNames) {
         var nameToUpperCase = enterNames.charAt(0).toUpperCase() + enterNames.slice(1).toLowerCase()
-        if (nameToUpperCase.match(regex)) {
-            if (names.length == 0) {
-                names.push({
-                    name: nameToUpperCase,
-                    counter: 1
-                });
-            } else {
-                if (!names.some(names => names.name === nameToUpperCase)) {
+        try {
+            var uniqueUser = await pool.query(`SELECT name from users WHERE name = $1`, [nameToUpperCase]);
+            if (uniqueUser.rowCount === 0) {
+                await pool.query(`INSERT INTO users (name,count) VALUES ($1,$2)`, [nameToUpperCase, 1])
+            }
+            else {
+                await pool.query(`UPDATE users SET  count= count + 1 WHERE name = $1`, [nameToUpperCase])
+            }
+            
+
+            if (nameToUpperCase.match(regex)) {
+                if (names.length == 0) {
                     names.push({
                         name: nameToUpperCase,
                         counter: 1
                     });
                 } else {
-                    names.forEach(element => {
-                        if (element.name === nameToUpperCase) {
-                            element.counter++
-                        }
-                    });
+                    if (!names.some(names => names.name === nameToUpperCase)) {
+                        names.push({
+                            name: nameToUpperCase,
+                            counter: 1
+                        });
+                    } else {
+                        names.forEach(element => {
+                            if (element.name === nameToUpperCase) {
+                                element.counter++
+                            }
+                        });
+                    }
                 }
+    
+    
             }
 
 
-        }
-
+    
+        } catch (err) {
+            console.error('Oops error has been detected!', err);
+            throw err;
+        } 
+        
 
     }
     function usernameObj(user) {
@@ -87,9 +105,12 @@ module.exports = function Greetings() {
         return userObj;
     }
 
-    function setCounter() {
+    async function setCounter() {
+        names = await pool.query(`select * from users`)
+        names = names.row
 
         return names.length;
+    
     }
 
     function greeted() {
