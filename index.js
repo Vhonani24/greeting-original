@@ -29,6 +29,10 @@ const exphbs = require('express-handlebars');
 
 const Greetings = require('./greetings');
 const greetings = Greetings(pool);
+const getRoutes = require('./routes');
+const routes = getRoutes(greetings);
+
+
 app.engine('handlebars', exphbs({ layoutsDir: 'views/layouts/' }));
 app.set('view engine', 'handlebars');
 
@@ -47,78 +51,14 @@ app.use(session({
 app.use(flash());
 
 
-app.get('/', async function (req, res) {
-  
-    res.render('index', {
-        message: req.flash('error'),
-        name: greetings.getNames(),
-        greetMessage: greetings.greet(),
-        counter: await greetings.setCounter(),
-       
-       
-        
-        
+app.get('/', routes.home);
 
-    });
-    
-});
-app.get('/greeted', function(req, res){
-    res.render('greeted', {
-        greeting: greetings.greeted(),
-        
-       
-    });
-});
-app.get('/counter/:name', async function(req, res){
-    const user = req.params.name;
-    
-    userGreeted=await greetings.individualCounter(user);
+app.get('/greeted', routes.greetedPage);
 
-    // console.log(greetings.usernameObj(user));
-    res.render('counter', {
-        user,
-        userGreeted
-       
-    
-        
-       
-    });
+app.get('/counter/:name', routes.counterPage);
 
-
-});
-
-app.post('/', async function (req, res) {
-    const { body } = req;
-    if (!body.lang ) {
-        req.flash('error', 'Please select a language!');
-        return res.redirect('/');
-    }
-    if(!body.name){
-        req.flash('error', 'Please enter your name!');
-        return res.redirect('/');
-    }
-    else{
-        greetings.setNames(req.body.name);
-        greetings.setLang(req.body.lang);
-        await greetings.pushNames(req.body.name);
-        await greetings.setCounter();
-        greetings.greeted();
-       
-        res.redirect("/");
-
-        // console.log(greetings.greeted())
-
-
-    }
-    
-    
-        
-});
-app.post('/reset', async function (req, res){
-    await greetings.resetDatabase();
-    res.redirect('/');
-
-});
+app.post('/', routes.postData);
+app.post('/reset', routes.resetData);
 
 
 const PORT = process.env.PORT || 2021;
