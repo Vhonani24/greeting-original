@@ -61,7 +61,7 @@ app.post('/', routes.postData);
 app.post('/reset', routes.resetData);
 
 
-const PORT = process.env.PORT || 2021;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
     
     console.log('App started at port:', PORT);
