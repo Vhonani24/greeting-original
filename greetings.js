@@ -49,10 +49,10 @@ module.exports = function Greetings(pool) {
         try {
             var uniqueUser = await pool.query(`SELECT name from users WHERE name = $1`, [nameToUpperCase]);
             if (uniqueUser.rowCount === 0) {
-                await pool.query(`INSERT INTO users (name,count) VALUES ($1,$2)`, [nameToUpperCase, 1])
+                var result = await pool.query(`INSERT INTO users (name,count) VALUES ($1,$2)`, [nameToUpperCase, 1])
             }
             else {
-                await pool.query(`UPDATE users SET  count= count + 1 WHERE name = $1`, [nameToUpperCase])
+                var result = await pool.query(`UPDATE users SET  count= count + 1 WHERE name = $1`, [nameToUpperCase])
             }
             
 
