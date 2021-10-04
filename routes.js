@@ -4,8 +4,6 @@ module.exports = function myGreetingsRoutes(greetings) {
 
         res.render('index', {
             message: req.flash('error'),
-            name: greetings.getNames(),
-            greetMessage: greetings.greet(),
             counter: await greetings.setCounter(),
 
 
@@ -17,7 +15,7 @@ module.exports = function myGreetingsRoutes(greetings) {
     }
     async function greetedPage(req, res) {
         res.render('greeted', {
-            greeting: greetings.greeted(),
+            greeting: await greetings.greeted(),
 
 
         });
@@ -27,7 +25,6 @@ module.exports = function myGreetingsRoutes(greetings) {
 
         userGreeted = await greetings.individualCounter(user);
 
-        // console.log(greetings.usernameObj(user));
         res.render('counter', {
             user,
             userGreeted
@@ -40,32 +37,35 @@ module.exports = function myGreetingsRoutes(greetings) {
 
     }
     async function postData(req, res) {
-        const { body } = req;
-        if (!body.lang) {
+        const { name, lang } = req.body;
+        if (!lang) {
             req.flash('error', 'Please select a language!');
-            return res.redirect('/');
+
         }
-        if (!body.name) {
+        else if (!name) {
             req.flash('error', 'Please enter your name!');
-            return res.redirect('/');
+
         }
         else {
-            greetings.setNames(req.body.name);
-            greetings.setLang(req.body.lang);
+
             await greetings.pushNames(req.body.name);
-            await greetings.setCounter();
-            greetings.greeted();
 
-            res.redirect("/");
+
+
         }
+        res.render('index', {
+            message: req.flash('error'),
+            greetMessage: greetings.greet(name, lang),
+            counter: await greetings.setCounter(),
 
+        });
 
 
     }
-    async function resetData(req, res){
+    async function resetData(req, res) {
         await greetings.resetDatabase();
         res.redirect('/');
-    
+
     }
     return {
         home,
