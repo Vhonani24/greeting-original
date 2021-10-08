@@ -5,11 +5,6 @@ module.exports = function myGreetingsRoutes(greetings) {
         res.render('index', {
             message: req.flash('error'),
             counter: await greetings.setCounter(),
-
-
-
-
-
         });
 
     }
@@ -28,10 +23,6 @@ module.exports = function myGreetingsRoutes(greetings) {
         res.render('counter', {
             user,
             userGreeted
-
-
-
-
         });
 
 
@@ -51,7 +42,6 @@ module.exports = function myGreetingsRoutes(greetings) {
             await greetings.pushNames(req.body.name);
 
 
-
         }
         res.render('index', {
             message: req.flash('error'),
@@ -59,8 +49,6 @@ module.exports = function myGreetingsRoutes(greetings) {
             counter: await greetings.setCounter(),
 
         });
-
-
     }
     async function resetData(req, res) {
         await greetings.resetDatabase();

@@ -5,6 +5,7 @@ module.exports = function Greetings(pool) {
 
     async function getNames() {
         const result = await pool.query("select * from users")
+
         return result.rows;
 
     }
@@ -62,7 +63,6 @@ module.exports = function Greetings(pool) {
 
     async function setCounter() {
        const names = await getNames()
-        console.log({names})
 
         return names.length;
 
@@ -77,18 +77,16 @@ module.exports = function Greetings(pool) {
 
     }
 
-
-    function greeted() {
-        return names;
-    }
-
     return {
         greet,
         pushNames,
         setCounter,
-        greeted: getNames,
+        greeted:getNames,
         individualCounter,
-        resetDatabase
+        resetDatabase,
+        addName,
+        updateCounter,
+        getName
     }
 
 

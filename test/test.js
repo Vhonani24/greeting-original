@@ -3,7 +3,7 @@ const Greetings = require('../greetings');
 const pg = require("pg");
 const Pool = pg.Pool;
 // we are using a special test database for the tests
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@localhost:5432/greet';
+const connectionString = process.env.DATABASE_URL || 'postgresql://vhonani:vhonani123@localhost:5432/greet';
 
 const pool = new Pool({
     connectionString,
@@ -31,17 +31,15 @@ describe('The greet function', function () {
 
         let testGreet = Greetings();
 
-        testGreet.setNames('ted');
-        testGreet.setLang('Mandarin');
-        assert.equal('你好吗, Ted', testGreet.greet());
+
+        assert.equal('你好吗, Ted', testGreet.greet('ted', 'Mandarin'));
     });
     it('should be able to take in a name and return a greeting in French and that name with the first letter uppercased', function () {
 
         let testGreet = Greetings();
 
-        testGreet.setNames('ted');
-        testGreet.setLang('French');
-        assert.equal('Comment ça va, Ted', testGreet.greet());
+
+        assert.equal('Comment ça va, Ted', testGreet.greet('ted', 'French'));
     });
 
 });
@@ -50,8 +48,8 @@ describe('Counter', function () {
 
         let testGreet = Greetings(pool);
 
-
-        await testGreet.pushNames('Musa');
+        await testGreet.addName('Musa');
+        await testGreet.updateCounter('Musa');
 
         assert.equal(1, await testGreet.setCounter());
 
@@ -63,9 +61,10 @@ describe('Counter', function () {
 
         await testGreet.pushNames('Musa');
         await testGreet.pushNames('Musa');
-        await testGreet.greet();
-        await testGreet.greet();
-        await testGreet.greet();
+        await testGreet.pushNames('MUsa');
+        testGreet.greet('Musa', 'French');
+        testGreet.greet('Musa', 'Spanish');
+        testGreet.greet('Musa', 'Mandarin');
 
         assert.equal(1, await testGreet.setCounter());
 
@@ -79,28 +78,24 @@ describe('Name list', async function () {
 
         let testGreet = Greetings(pool);
 
+
         await testGreet.pushNames('Musa');
         await testGreet.pushNames('Mulalo');
         await testGreet.pushNames('Naledi');
         await testGreet.pushNames('Piet');
+        
+        var nameList = [];
+        var greeted = await testGreet.greeted();
+        for (var i = 0; i < greeted.length; i++) {
+            nameList.push(greeted[i].name);
+            //console.log(nameList);
 
-        assert.deepEqual([{
-            counter: 1,
-            name: 'Musa'
-        },
-        {
-            counter: 1,
-            name: 'Mulalo'
-        },
-        {
-            counter: 1,
-            name: 'Naledi'
+        }
 
-        },
-        {
-            counter: 1,
-            name: 'Piet'
-        }], testGreet.greeted());
+
+
+        assert.deepEqual(
+            ["Musa","Mulalo","Naledi","Piet"], nameList)
 
 
     });
@@ -112,14 +107,15 @@ describe('Name list', async function () {
         await testGreet.pushNames('Mulalo');
         await testGreet.pushNames('Mashudu');
 
-        assert.deepEqual([{
-            counter: 2,
-            name: 'Mulalo'
-        },
-        {
-            counter: 1,
-            name: 'Mashudu'
-        }], testGreet.greeted());
+        var nameList = [];
+        var greeted = await testGreet.greeted();
+        for (var i = 0; i < greeted.length; i++) {
+            nameList.push(greeted[i].name);
+            //console.log(nameList);
+
+        }
+
+        assert.deepEqual(["Mulalo","Mashudu"], nameList)
 
     });
 
